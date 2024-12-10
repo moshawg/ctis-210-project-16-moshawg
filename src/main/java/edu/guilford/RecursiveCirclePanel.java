@@ -36,7 +36,7 @@ public class RecursiveCirclePanel extends JPanel {
         setPreferredSize(new Dimension(this.panelWidth, this.panelHeight));
         initialX = 500;
         initialY = 400;
-        radius = rand.nextDouble() * 20;
+        radius = rand.nextDouble() * 100 + 90;
         drawAllCircles();
         repaint();
         addMouseListener(new UseMouse());
