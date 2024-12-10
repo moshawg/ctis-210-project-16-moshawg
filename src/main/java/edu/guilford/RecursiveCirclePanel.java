@@ -54,6 +54,7 @@ public class RecursiveCirclePanel extends JPanel {
     public void addCircle(double cx, double cy, double radius) {
         ColorEllipse theCircle = new ColorEllipse(cx - radius, cy - radius, 2 * radius, 2 * radius);
         circles.add(theCircle);
+        //Base case
         if (radius < MIN_RADIUS) {
             return;
         } else {
@@ -64,11 +65,12 @@ public class RecursiveCirclePanel extends JPanel {
             else if (factor <=0) {
                 factor = reduceFactor;
             }
-
+            //Problem gets smaller since new radius is smaller
             double newRadius = radius * factor;
             double angle = Math.PI * rand.nextDouble();
             double newX = cx + (radius + newRadius) * Math.cos(angle);
             double newY = cy + (radius + newRadius) * Math.sin(angle);
+            //Recursive call below
             addCircle(newX, newY, newRadius);
             double newX2 = cx - (radius + newRadius) * Math.cos(angle);
             double newY2 = cy - (radius + newRadius) * Math.sin(angle);
