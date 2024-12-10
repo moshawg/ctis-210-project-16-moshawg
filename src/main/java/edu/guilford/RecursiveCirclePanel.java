@@ -34,11 +34,10 @@ public class RecursiveCirclePanel extends JPanel {
         this.panelHeight = panelHeight;
         this.panelWidth = panelWidth;
         setPreferredSize(new Dimension(this.panelWidth, this.panelHeight));
-        initialX = 500;
-        initialY = 400;
+        initialX = panelWidth/10 + rand.nextDouble() * panelWidth/2;
+        initialY = panelHeight/10 + rand.nextDouble() * panelHeight/2;
         radius = rand.nextDouble() * 100 + 90;
         drawAllCircles();
-        repaint();
         addMouseListener(new UseMouse());
         addKeyListener(new UseKeys());
     }
@@ -92,12 +91,7 @@ public class RecursiveCirclePanel extends JPanel {
 
     private class UseMouse implements MouseListener {
         @Override
-        public void mouseClicked(MouseEvent e) {
-            initialX = e.getX();
-            initialY = e.getY();
-            radius = rand.nextDouble() * 100 + 90;
-            drawAllCircles();
-        }
+        public void mouseClicked(MouseEvent e) {}
         @Override
         public void mousePressed(MouseEvent e) {}
         @Override
@@ -114,7 +108,13 @@ public class RecursiveCirclePanel extends JPanel {
     public class UseKeys implements KeyListener {
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println(e);
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                initialX = panelWidth/10 + rand.nextDouble() * panelWidth/2;
+                initialY = panelHeight/10 + rand.nextDouble() * panelHeight/2;
+                radius = rand.nextDouble() * 100 + 90;
+                drawAllCircles();
+            }
+
             if (e.getKeyCode() == KeyEvent.VK_S && e.isShiftDown()) {
                 BufferedImage image = new BufferedImage(getWidth(), getHeight(),
                 BufferedImage.TYPE_INT_RGB);
@@ -129,12 +129,8 @@ public class RecursiveCirclePanel extends JPanel {
             }
         }
         @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
+        public void keyReleased(KeyEvent e) {}
         @Override
-        public void keyTyped(KeyEvent e) {
-        
-        }
+        public void keyTyped(KeyEvent e) {}
     }
 }
